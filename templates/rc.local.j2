@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ip link set {{ listener_int }} promisc on
+ip link set {{ listener_int }} up
+
+
+exit 0

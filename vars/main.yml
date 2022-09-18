@@ -1,15 +1,4 @@
-# ansible-tshark-listener
-
-
-
-## Requirements
-
- ansible-galaxy collection install community.general
- ansible-galaxy collection install geerlingguy.ntp
-
- ## Variables
-
- ```
+---
 # This user will be set up to capture packets
 user_name: Tarmac3938
 
@@ -23,4 +12,3 @@ tshark_interval: 86400
 tshark_files: 7
 # directory location of pcap files
 tshark_buffer_dir: /tshark
- ```
