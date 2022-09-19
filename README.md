@@ -11,7 +11,7 @@ Specify one interface to listen on and attach this interface to a TAP or SPAN/mi
 ## Requirements
 
 ```
-ansible-galaxy collection install geerlingguy.ntp
+ansible-galaxy install geerlingguy.ntp
 ```
 
 ## Variables
