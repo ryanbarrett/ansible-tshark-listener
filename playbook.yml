@@ -9,6 +9,9 @@
   - geerlingguy.ntp
 
   tasks:
+  - name: Set the hostname
+    ansible.builtin.hostname:
+      name: "{{ server_name }}"
   - name: install packages
     ansible.builtin.package:
       name: "{{ item }}"
