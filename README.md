@@ -11,9 +11,9 @@ Specify one interface to listen on and attach this interface to a TAP or SPAN/mi
 ## Requirements
 
 ```
-ansible-galaxy collection install community.general
 ansible-galaxy collection install geerlingguy.ntp
 ```
+
 ## Variables
 vars/main.yml
 ```
@@ -52,7 +52,7 @@ tshark_options: "-i {{ listener_int }} -b interval:{{ tshark_interval }} -b file
 ``` ansible-playbook -i hosts.yml playbook.yml```
 
 ## Proxmox Settings
-''Ignore this if you are not using proxmox.''
+*Ignore this section if you are not using proxmox.*
 
 Some additional settings are needed in proxmox.
 
