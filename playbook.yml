@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  remote_user: "{{ user_name }}"
+  remote_user: "{{ ansible_user_name }}"
   become: yes
   vars_files:
     - vars/main.yml
@@ -18,21 +18,8 @@
       state: present
     with_items:
     - tshark
-  - name: Create work directory for tshark buffer files.
-    ansible.builtin.file:
-      path: "{{ tshark_buffer_dir }}"
-      owner: "{{ user_name }}"
-      group: "{{ user_name }}"
-      mode: '0770'
-      state: directory
-  - name: install rc.local template to start capture on reboot
-    ansible.builtin.template:
-      src: ./templates/rc.local.j2
-      dest: /etc/rc.local
-      mode: '0755'
-      owner: root 
-      group: root
- # https://packetlife.net/blog/2010/mar/19/sniffing-wireshark-non-root-user/
+    - tmux
+   # https://packetlife.net/blog/2010/mar/19/sniffing-wireshark-non-root-user/
   - name: create group tshark for dumpcap access
     ansible.builtin.group:
       name: tshark
@@ -42,6 +29,8 @@
       name: "{{ user_name }}"
       append: yes
       groups: tshark
+      shell: /bin/bash
+      state: present
   - name: set group for dumpcap
     ansible.builtin.file:
       path: /usr/bin/dumpcap
@@ -59,6 +48,26 @@
   #   with_items:
   #   - cap_net_raw+eip
   #   - cap_net_admin+eip
+  - name: Create work directory for tshark buffer files.
+    ansible.builtin.file:
+      path: "{{ tshark_buffer_dir }}"
+      owner: "{{ user_name }}"
+      group: "{{ user_name }}"
+      mode: '0770'
+      state: directory
+  - name: install rc.local template to start capture on reboot
+    ansible.builtin.template:
+      src: ./templates/rc.local.j2
+      dest: /etc/rc.local
+      mode: '0755'
+      owner: root 
+      group: root
+  - name: set bash shell for cron
+    ansible.builtin.cron:
+      name: SHELL
+      user: "{{ user_name }}"
+      env: yes
+      job: /bin/bash
   - name: launch tmux session ~ tmux attach-session
     ansible.builtin.cron:
       name: launch tmux session for user

@@ -1,11 +1,21 @@
 ---
-# This user will be set up to capture packets
-user_name: Tarmac3938
+server_name: tshark
 
-server_names: tshark
+# Set your timezone if desired
+ntp_timezone: America/Chicago
+
+# Setup user
+ansible_user_name: Tarmac3938
+
+# This user will be set up to capture packets
+## view status with tmux:
+## sudo su - tshark_user && tmux attach-session
+user_name: tshark_user
+
 # aux interface to set in promiscious mode
 listener_int: ens19
 
+### tshark settings ###
 # seconds 86400 = 1 day 3600 = 1 hour
 tshark_interval: 86400
 # quantity of rotating files
