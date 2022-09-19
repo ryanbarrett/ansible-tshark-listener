@@ -61,13 +61,4 @@
       name: launch tmux session for user
       user: "{{ user_name }}"
       special_time: reboot
-      job: tmux new-session -d -s tshark && tmux set-option -t tshark remain-on-exit on && tmux new-window -d -n 'tsharkCapture' -t tshark:1 'tshark -i {{ listener_int }} -b interval:{{ tshark_interval }} -b files:{{ tshark_files }} -w {{ tshark_buffer_dir }}/trace.pcap'
-
-  # - name: launch tshark tab
-  #   ansible.builtin.cron:
-  #     name: launch tshark tab
-  #     user: "{{ user_name }}"
-  #     special_time: reboot
-  #     job: tmux new-window -d -n 'tsharkCapture' -t tshark:1 'tshark -i {{ listener_int }} -b interval:{{ tshark_interval }} -b files:{{ tshark_files }} -w {{ tshark_buffer_dir }}/trace.pcap'
-
-
+      job: tmux new-session -d -s tshark && tmux set-option -t tshark remain-on-exit on && tmux new-window -d -n 'tsharkCapture' -t tshark:1 'tshark {{ tshark_options }}'
