@@ -5,7 +5,7 @@ The goal is to provide an hourly/daily/weekly packet trace to provide pcap files
 **To get started:**
 Set up a machine with 2 interfaces (VM, laptop, or raspberry pi).
 
-Specify one interface to listen on and attach this interface to a TAP or SPAN/mirrored port. (e.g. listener_int )
+Specify one interface to listen on and attach this interface to a TAP or SPAN/mirrored port. (i.e. listener_int )
 
 
 ## Requirements
