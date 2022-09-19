@@ -47,7 +47,9 @@ tshark_buffer_dir: /tshark
 tshark_options: "-i {{ listener_int }} -b interval:{{ tshark_interval }} -b files:{{ tshark_files }} -w {{ tshark_buffer_dir }}/trace.pcap"
 
 ```
+# Run the playbook
 
+``` ansible-playbook -i hosts.yml playbook.yml```
 
 ## Proxmox Settings
 ''Ignore this if you are not using proxmox.''
