@@ -1,11 +1,18 @@
 # ansible-tshark-listener
 
-The goal is to provide an hourly/daily/weekly packet trace to provide pcap files for analysis.
+The goal is to provide an hourly/daily/weekly packet trace to provide pcap files for analysis. 
 
 **To get started:**
 Set up a machine with 2 interfaces (VM, laptop, or raspberry pi).
 
-Specify one interface to listen on and attach this interface to a TAP or SPAN/mirrored port. (i.e. listener_int )
+Specify one interface to listen to a TAP or SPAN/mirrored port.
+
+This port will be set in promisc mode.
+
+On reboot a tmux session will be launched with the user you specify as the "tshark_user_name".
+
+This will begin capturing packets to your "tshark_buffer_dir".
+
 
 
 ## Requirements
@@ -25,15 +32,19 @@ ntp_timezone: America/Chicago
 
 # Setup user
 ansible_user_name: Tarmac3938
+```
 
+tshark-listener/defaults/main.yml
+```
+#Replace with your preferred vars
 # This user will be set up to capture packets
 ## view status with tmux:
 ## sudo su - tshark_user
 ## tmux attach-session
-user_name: tshark_user
+tshark_user_name: tshark_user
 
 # aux interface to set in promiscious mode
-listener_int: ens19
+tshark_listener_int: ens19
 
 
 ### tshark settings ###
